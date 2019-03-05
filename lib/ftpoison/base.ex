@@ -63,7 +63,7 @@ defmodule FTPoison.Base do
 
       @spec start(String.t) :: {:ok, PID} | {:error, {atom, atom}}
       def start(host) do
-        start_inets
+        start_inets()
         case :inets.start(:ftpc, host: to_char_list(host)) do
           {:ok, pid} -> pid
           e -> handle_error(e)

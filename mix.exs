@@ -1,7 +1,7 @@
 defmodule FTPoison.Mixfile do
   use Mix.Project
 
-  @version 0.1.0
+  @version "0.1.0"
 
   def project do
     [app: :ftpoison,
@@ -12,7 +12,7 @@ defmodule FTPoison.Mixfile do
      description: description(),
      package: package(),
      name: "FTPoison",
-     deps: deps]
+     deps: deps()]
   end
 
   defp description do

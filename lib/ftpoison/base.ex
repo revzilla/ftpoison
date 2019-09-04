@@ -115,7 +115,7 @@ defmodule FTPoison.Base do
 
       @spec to_char_list(String.t()) :: List.t()
       defp to_char_list(string) do
-        string |> String.to_char_list()
+        string |> String.to_charlist()
       end
 
       defp handle_error(error) do

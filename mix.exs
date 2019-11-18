@@ -32,8 +32,7 @@ defmodule FTPoison.Mixfile do
 
   def application do
     [
-      applications: [:logger],
-      extra_applications: [:ftp]
+      extra_applications: [:logger, :ftp]
     ]
   end
 

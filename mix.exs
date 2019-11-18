@@ -1,12 +1,12 @@
 defmodule FTPoison.Mixfile do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.1.1"
 
   def project do
     [app: :ftpoison,
      version: @version,
-     elixir: "~> 1.3",
+     elixir: "~> 1.6.6",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      description: description(),
@@ -31,10 +31,14 @@ defmodule FTPoison.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [
+      extra_applications: [:logger, :ftp]
+    ]
   end
 
   defp deps do
-    []
+    [
+      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false}
+    ]
   end
 end

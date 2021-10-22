@@ -9,7 +9,8 @@ defmodule FTPoison.Error do
 
   defp error_reason_map do
     %{
-      ehost: "Host is not found, FTP server is not found, or connection is rejected by FTP server.",
+      ehost:
+        "Host is not found, FTP server is not found, or connection is rejected by FTP server.",
       eclosed: "The session is closed.",
       econn: "Connection to the remote server is prematurely closed.",
       elogin: "User is not logged in.",
@@ -20,7 +21,7 @@ defmodule FTPoison.Error do
       etnospc: "Insufficient storage space in system [452].",
       epnospc: "Exceeded storage allocation (for current directory or dataset) [552].",
       efnamena: "Filename not allowed [553].",
-      enofile: "No such file or directory.",
+      enofile: "No such file or directory."
     }
   end
 end

@@ -5,7 +5,7 @@ defmodule FTPoisonTest do
   test """
   start/1
   given valid host string
-  will start an inets ftp connection
+  will start an ftp connection
   """ do
     pid = FTPoison.start("localhost")
     refute is_nil(pid)
@@ -16,18 +16,20 @@ defmodule FTPoisonTest do
   given invalid host
   will respond with appropriate error
   """ do
-    assert_raise FTPoison.Error, "Host is not found, FTP server is not found, or connection is rejected by FTP server.", fn ->
-      FTPoison.start("notaserver")
-    end
+    assert_raise FTPoison.Error,
+                 "Host is not found, FTP server is not found, or connection is rejected by FTP server.",
+                 fn ->
+                   FTPoison.start("notaserver")
+                 end
   end
 
   test """
   start/1
   given valid host
-  and inets is already started
+  and ftp is already started
   does not fail to start server
   """ do
-    :inets.start
+    :ftp.start()
     pid = FTPoison.start("localhost")
     refute is_nil(pid)
   end
@@ -38,6 +40,7 @@ defmodule FTPoisonTest do
   returns current working directory as a String
   """ do
     pid = FTPoison.start("localhost")
+
     assert_raise FTPoison.Error, " Please login with USER and PASS.\r\n", fn ->
       FTPoison.pwd(pid) == "/"
     end
@@ -49,6 +52,7 @@ defmodule FTPoisonTest do
   returns the listing as a String
   """ do
     pid = FTPoison.start("localhost")
+
     assert_raise FTPoison.Error, " Please login with USER and PASS.\r\n", fn ->
       FTPoison.list(pid) == []
     end

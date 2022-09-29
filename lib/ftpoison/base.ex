@@ -12,7 +12,7 @@ defmodule FTPoison.Base do
         end
       end
 
-      @doc "Starts a standalone FTP client process (without the Inets service framework)
+      @doc "Starts a standalone FTP client process (without the ftp service framework)
       and opens a session with the FTP server at Host."
       @spec open(String.t(), map()) :: nil
       def open(host, options \\ %{}) do
@@ -63,9 +63,9 @@ defmodule FTPoison.Base do
 
       @spec start(String.t()) :: pid() | nil
       def start(host) do
-        start_inets()
+        :ftp.start()
 
-        case :inets.start(:ftpc, host: to_charlist(host)) do
+        case :ftp.open(to_charlist(host)) do
           {:ok, pid} -> pid
           e -> handle_error(e)
         end
@@ -73,7 +73,8 @@ defmodule FTPoison.Base do
 
       @spec stop(pid()) :: any()
       def stop(pid) do
-        :inets.stop(:ftpc, pid)
+        :ftp.close(pid)
+        :ftp.stop()
       end
 
       @spec user(pid(), String.t(), String.t()) :: pid() | nil
@@ -82,11 +83,6 @@ defmodule FTPoison.Base do
           :ok -> pid
           e -> handle_error(e)
         end
-      end
-
-      @spec start_inets :: :ok
-      defp start_inets do
-        :inets.start()
       end
 
       @spec to_charlist(String.t()) :: charlist()
